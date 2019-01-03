@@ -1,0 +1,12 @@
+        Lord         |        Realm        |     Power level     
+       Zariel        |       Avernus       |          1          
+      Dispater       |         Dis         |          2          
+       Mammon        |      Minauros       |          3          
+       Belial        |     Phlegethos      |          4          
+      Levistus       |       Stygia        |          5          
+       Glasya        |      Malbolge       |          6          
+      Baalzebul      |     Maladomini      |          7          
+   Mephistopheles    |        Cania        |          8          
+      Asmodeus       |       Nessus        |          9          
+      Sothistum      |      Lethrakki      |         10          
+       Wasmoth       |       Lemsth        |         656         
