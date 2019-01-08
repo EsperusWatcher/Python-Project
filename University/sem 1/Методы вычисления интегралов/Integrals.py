@@ -44,6 +44,18 @@ def parabola(a,b,n): # Метод парабол(Симпсона)
 	summ *= h / 3
 	return summ
 
+def three_eight(a,b,n): # Метод трех восьмых
+	h = (b-a)/n/3
+	m = 3 * n - 1
+	summ = f(a) + f(b)
+	for i in range(1, m):
+		if i % 3 == 0:
+			summ += 2 * f(a + h * i)
+		else:
+			summ += 3 * f(a + h * i)
+	summ *= 3/8 * h
+	return summ
+
 def f(x): # Функция для интегрирования
 	return 2 * x + 5
 
@@ -76,5 +88,6 @@ print("Метод левых прямоугольников: ", calculate(left_t
 print("Метод средних прямоугольников: ", calculate(center_triangles, n, n2, eps))
 print("Метод трапеций: ", calculate(trapeze, n, n2, eps))
 print("Метод парабол(Симпсона): ", calculate(parabola, n, n2, eps))
+print("Метод 3/8: ", calculate(three_eight,n,n2,eps))
 
 a = input()
