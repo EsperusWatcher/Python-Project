@@ -4,6 +4,57 @@ import math as m
 
 def f(x):
 	return x ** 3 + x - 2
+
+def f_prime(x):
+	return 3 * x ** 2 + 1
+# ------------------------------------------------------
+# Метод Ньютона(касательных)
+# Для получения сжимающего отображения применяется метод простых итераций
+# Затем для приближенных рассчетов используется производная данной функции
+def newtone(a,b,eps):
+	c = a
+	result = c
+	x = c - f(c) / f_prime(c)
+	while abs(result - x) > eps:
+		result = x
+		x = x - f(x) / f_prime(x)
+	return x
+# ------------------------------------------------------
+# Упрощенный метод Ньютона
+def easy_newtone(a,b,eps):
+	c = (a + b) / 2
+	result = c
+	x = c - f(c) / f_prime(c) # x0
+	prime = f_prime(x)
+	while abs(result - x) > eps:
+		result = x
+		x = x - f(x) / prime
+	return x
+# ------------------------------------------------------
+# Метод Стеффенсена
+def steffensen(a,b,eps):
+	c = (a + b) / 2
+	result = c
+	x = c - f(c) / (f(c + f(c)) / f(c) - 1)
+	while abs(result - x) > eps:
+		result = x
+		x = x - f(x) / (f(x + f(x)) / f(x) - 1)
+	return x
+# ------------------------------------------------------
+# Метод секущих
+def sek(a,b,eps):
+	c0 = a
+	c = (a+b)/2
+	result = c
+	x0 = c 
+	x0 = c - (c - c0) / (f(c) - f(c0)) * f(c)
+	x = x0 - ((x0 - c) / (f(x0) - f(c))) * f(x0)
+
+	while abs(result - x) > eps:
+		result = x
+		x = x - ((x - x0) / (f(x) - f(x0))) * f(x)
+		x0 = result
+	return x
 # ------------------------------------------------------
 # Метод дихотомии(бисекции)
 # Рассматриваемый интервал должен пересеекать 0
@@ -46,12 +97,18 @@ def iterations(a,b, eps):
 # ------------------------------------------------------
 a = -10 # Начало и конец интервала уточнения
 b = 10
-eps = 0.001
+eps = 0.0001
 print("Уравнение: y = x^3 + x - 2")
 print("Рассматриваемый интервал: [{},{}]".format(a,b) )
 print("Выбранная точность: ", eps)
 print()
 print("Метод дихотомии: ", dihotomy(a,b,eps))
 print("Метод хорд: ", chord(a,b,eps))
-print("Метод итераций: ", iterations(a, b, eps))
+#print("Метод итераций: ", iterations(a, b, eps))
+print("Метод Ньютона: ", newtone(a, b, eps))
+print("Упрощенный метод Ньютона: ", easy_newtone(a, b, eps))
+print("Метод Стеффенсена: ", steffensen(a, b, eps))
+print("Метод секущих: ", sek(a, b, eps))
+
+
 a = input()
