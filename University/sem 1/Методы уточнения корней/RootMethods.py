@@ -21,6 +21,7 @@ def newtone(a,b,eps):
 	return x
 # ------------------------------------------------------
 # Упрощенный метод Ньютона
+# Производная вычисляется только для первого элемента x0
 def easy_newtone(a,b,eps):
 	c = (a + b) / 2
 	result = c
@@ -54,6 +55,23 @@ def sek(a,b,eps):
 		result = x
 		x = x - ((x - x0) / (f(x) - f(x0))) * f(x)
 		x0 = result
+	return x
+# ------------------------------------------------------
+# Комбинированный метод
+def f_pp(x): # сторая производная от функции
+	return 6 * x
+
+def combo(a,b,eps):
+	while abs(a-b)>2 * eps:
+		if f(a) * f_pp(a) < 0:
+			a = a - f(a) * (a-b) / (f(a) - f(b))
+		elif f(a) * f_pp(a) > 0:
+			a = a - f(a)/f_prime(a)
+		if f(b) * f_pp(b) < 0:
+			b = b - f(b) * (b-a) / (f(b) - f(a))
+		elif f(b) * f_pp(b) > 0:
+			b = b - f(b)/f_prime(b)
+	x = (a + b) / 2
 	return x
 # ------------------------------------------------------
 # Метод дихотомии(бисекции)
@@ -104,11 +122,13 @@ print("Выбранная точность: ", eps)
 print()
 print("Метод дихотомии: ", dihotomy(a,b,eps))
 print("Метод хорд: ", chord(a,b,eps))
-#print("Метод итераций: ", iterations(a, b, eps))
 print("Метод Ньютона: ", newtone(a, b, eps))
 print("Упрощенный метод Ньютона: ", easy_newtone(a, b, eps))
 print("Метод Стеффенсена: ", steffensen(a, b, eps))
 print("Метод секущих: ", sek(a, b, eps))
+print("Комбинированный метод: ", combo(a, b, eps))
+print("Метод итераций: ", iterations(a, b, eps))
+
 
 
 a = input()
