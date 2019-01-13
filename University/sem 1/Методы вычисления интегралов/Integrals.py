@@ -26,9 +26,9 @@ def trapeze(a,b,n): # Метод трапеций
 	h = (b - a)/n
 	summ = 0
 	for k in range(1,n):
-		one = f(a + h * (k - 1))
+		one = f(a + h * (k - 1)) # Основания трапеции
 		two = f(a + h * k)
-		summ += (two + one) / 2 * h
+		summ += (two + one) / 2 * h # Прибавляется площадь текущей трапеции
 	return summ
 
 def parabola(a,b,n): # Метод парабол(Симпсона)
@@ -55,6 +55,7 @@ def three_eight(a,b,n): # Метод трех восьмых
 			summ += 3 * f(a + h * i)
 	summ *= 3/8 * h
 	return summ
+
 
 def f(x): # Функция для интегрирования
 	return 2 * x + 5

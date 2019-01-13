@@ -36,10 +36,10 @@ def easy_newtone(a,b,eps):
 def steffensen(a,b,eps):
 	c = (a + b) / 2
 	result = c
-	x = c - f(c) / (f(c + f(c)) / f(c) - 1)
+	x = c - f(c) * f(c) / (f(c + f(c)) - f(c))
 	while abs(result - x) > eps:
 		result = x
-		x = x - f(x) / (f(x + f(x)) / f(x) - 1)
+		x = x - f(x) * f(x) / (f(x + f(x)) - f(x))
 	return x
 # ------------------------------------------------------
 # Метод секущих
@@ -93,7 +93,7 @@ def dihotomy(a,b,eps):
 # Начальная хорда проходит через точки
 # С(a,f(a)) : D(b,f(b))
 def chord(a, b, eps):
-	xn = (a * f(b) - b * f(a)) / (f(b) - f(a)) # Уравнение хорды через 2 точки в точке пересечения с осью
+	xn = a - f(a) * (b - a) / (f(b) - f(a)) # Уравнение хорды через 2 точки в точке пересечения с осью
 	if abs(f(xn)) < eps:
 		return xn
 	if f(a) * f(xn) < 0:
@@ -131,7 +131,5 @@ print("Метод Стеффенсена: ", steffensen(a, b, eps))
 print("Метод секущих: ", sek(a, b, eps))
 print("Комбинированный метод: ", combo(a, b, eps))
 print("Метод итераций: ", iterations(a, b, eps))
-
-
 
 a = input()
